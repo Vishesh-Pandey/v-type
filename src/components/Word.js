@@ -10,6 +10,8 @@ function Word(props) {
           ? "fs-2 text-success fw-bolder"
           : props.word["status"] === "incorrect"
           ? "fs-2 text-danger fw-bolder"
+          : props.word["status"] === "partially-incorrect"
+          ? "fs-2 text-danger fw-bolder opacity-50"
           : "fs-2 opacity-50"
       }`}
     >

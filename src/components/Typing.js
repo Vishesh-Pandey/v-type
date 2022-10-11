@@ -77,6 +77,15 @@ function Typing() {
       setStarted(true);
     }
     setTypedWord(event.target.value);
+
+    if (
+      event.target.value ===
+      words[current].word.substring(0, event.target.value.length)
+    ) {
+      words[current].status = "untracked";
+    } else {
+      words[current].status = "partially-incorrect";
+    }
     if (event.target.value.charAt(event.target.value.length - 1) === " ") {
       if (event.target.value === words[current].word + " ") {
         words[current].status = "correct";
@@ -89,10 +98,6 @@ function Typing() {
     }
     setwpm((correctCount / (seconds / 60)).toFixed(2));
     setacc(((correctCount / current) * 100).toFixed(2));
-  };
-
-  const restartTest = () => {
-    loadWords();
   };
 
   return (
