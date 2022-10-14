@@ -12,7 +12,7 @@ function Typing() {
   const [typedWord, setTypedWord] = useState("");
   const [current, setCurrent] = useState(0);
   const [wordsCollection, setWordsCollection] = useState(
-    "hello what two nine go seven you love sum cosmos sun universe"
+    "hello world two nine go seven you love sum cosmos sun universe"
   ); // contains all the words
   const [wordsCollectionArray, setWordsCollectionArray] = useState(
     wordsCollection.split(" ")
@@ -21,13 +21,13 @@ function Typing() {
   const [words, setWords] = useState([
     //sample word object
     {
-      word: "Hello",
+      word: "hello",
       status: "untracked",
       speed: -1,
       accuracy: 0,
     },
     {
-      word: "typer...",
+      word: "world",
       status: "untracked",
       speed: -1,
       accuracy: 0,
@@ -82,7 +82,7 @@ function Typing() {
       event.target.value ===
       words[current].word.substring(0, event.target.value.length)
     ) {
-      words[current].status = "untracked";
+      words[current].status = "tracking";
     } else {
       words[current].status = "partially-incorrect";
     }
@@ -106,7 +106,7 @@ function Typing() {
         <div className="row">
           <div className="col py-5 text-center fs-3">
             {words.map((word, index) => {
-              return <Word key={index} word={word} />;
+              return <Word key={index} word={word} typedWord={typedWord} />;
             })}
           </div>
         </div>

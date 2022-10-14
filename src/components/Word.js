@@ -1,7 +1,10 @@
 import React from "react";
+import Char from "./Char";
+import { useState } from "react";
 
 function Word(props) {
-  return (
+  const [givenWord, setGivenWord] = useState(props.word["word"].split(""));
+  return props.word["status"] !== "tracking" ? (
     <span
       className={`${
         props.word["status"] === "untracked"
@@ -17,6 +20,19 @@ function Word(props) {
     >
       {props.word["word"] + " "}
     </span>
+  ) : (
+    <span>
+      {givenWord.map((element, index) => {
+        return (
+          <Char
+            key={index}
+            givenCharacter={element}
+            typedCharacter={props.typedWord[index]}
+          />
+        );
+      })}{" "}
+    </span>
+    // <span className="bg-info">{props.word["word"] + " "}</span>
   );
 }
 
