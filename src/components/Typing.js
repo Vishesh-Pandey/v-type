@@ -8,7 +8,6 @@ function Typing() {
   const [correctCount, setCorrectCount] = useState(0);
   const [started, setStarted] = useState(false);
   const [seconds, setSeconds] = useState(0);
-
   const [typedWord, setTypedWord] = useState("");
   const [current, setCurrent] = useState(0);
   const [wordsCollection, setWordsCollection] = useState(
@@ -17,7 +16,6 @@ function Typing() {
   const [wordsCollectionArray, setWordsCollectionArray] = useState(
     wordsCollection.split(" ")
   );
-
   const [words, setWords] = useState([
     //sample word object
     {
@@ -34,6 +32,7 @@ function Typing() {
     },
   ]);
 
+  // function to reset everything when test restarts / new sentence is loaded
   const resetData = () => {
     setwpm(0);
     setacc(100);
@@ -44,6 +43,7 @@ function Typing() {
     setCurrent(0);
   };
 
+  // function to load a new sentence
   const loadWords = () => {
     // creating Object for words with details
     clearInterval(timer.current);
@@ -63,12 +63,20 @@ function Typing() {
     document.getElementById("userInput").focus();
   };
 
-  // conditions for the words - current , correct , incorrect , normal
+  // possible conditions for the words - current , correct , incorrect , normal
 
+  // function which is called whenever user types something
   const handleOnChange = (event) => {
-    if (current > words.length - 1) {
-      clearInterval(timer.current);
-      return;
+    if (current >= words.length - 1) {
+      // Currently typing last word
+      if (event.target.value === words[current]["word"]) {
+        // Last word completed
+        clearInterval(timer.current);
+      }
+      if (event.target.value.charAt(event.target.value.length - 1) === " ") {
+        // Last word completed
+        clearInterval(timer.current);
+      }
     }
     if (started === false) {
       timer.current = setInterval(() => {
@@ -86,6 +94,7 @@ function Typing() {
     } else {
       words[current].status = "partially-incorrect";
     }
+
     if (event.target.value.charAt(event.target.value.length - 1) === " ") {
       if (event.target.value === words[current].word + " ") {
         words[current].status = "correct";
@@ -94,7 +103,10 @@ function Typing() {
         words[current].status = "incorrect";
       }
       setTypedWord("");
-      setCurrent(current + 1);
+      // Using function to change the value of useState
+      setCurrent((current) => {
+        return current + 1;
+      });
     }
     setwpm((correctCount / (seconds / 60)).toFixed(2));
     setacc(((correctCount / current) * 100).toFixed(2));
