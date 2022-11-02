@@ -11,9 +11,9 @@ function Typing() {
   const [typedWord, setTypedWord] = useState("");
   const [current, setCurrent] = useState(0);
   const [wordsCollection, setWordsCollection] = useState(
-    "hello world two nine go seven you love sum cosmos sun universe"
+    "hello world two nine go seven you love sum cosmos sun universe can beat you for anything like that put for amazing coding future beat stand under tree god around world phase yes library for building user interfaces based also called a schoolteacher or formally an educator is a person who helps students to acquire knowledge vishesh"
   ); // contains all the words
-  const [wordsCollectionArray, setWordsCollectionArray] = useState(
+  const [fullWordsCollectionArray, setFullWordsCollectionArray] = useState(
     wordsCollection.split(" ")
   );
   const [words, setWords] = useState([
@@ -45,6 +45,12 @@ function Typing() {
 
   // function to load a new sentence
   const loadWords = () => {
+    document.body.style.backgroundColor = "white";
+    let wordsCollectionArray = [];
+    for (let i = 0; i < 12; i++) {
+      let index = Math.floor(Math.random() * 10);
+      wordsCollectionArray.push(fullWordsCollectionArray[index]);
+    }
     // creating Object for words with details
     clearInterval(timer.current);
     timer.current = null;
@@ -72,10 +78,12 @@ function Typing() {
       if (event.target.value === words[current]["word"]) {
         // Last word completed
         clearInterval(timer.current);
+        document.body.style.backgroundColor = "yellow";
       }
       if (event.target.value.charAt(event.target.value.length - 1) === " ") {
         // Last word completed
         clearInterval(timer.current);
+        document.body.style.backgroundColor = "yellow";
       }
     }
     if (started === false) {

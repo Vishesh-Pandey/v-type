@@ -1,9 +1,9 @@
 import React from "react";
 import Char from "./Char";
-import { useState } from "react";
 
 function Word(props) {
-  const [givenWord, setGivenWord] = useState(props.word["word"].split(""));
+  // const [givenWord, setGivenWord] = useState(props.word["word"].split(""));
+  let givenWord = props.word["word"].split("");
   return props.word["status"] !== "tracking" ? (
     <span
       className={`${
