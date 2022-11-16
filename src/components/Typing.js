@@ -10,6 +10,7 @@ function Typing() {
   const [seconds, setSeconds] = useState(0);
   const [typedWord, setTypedWord] = useState("");
   const [current, setCurrent] = useState(0);
+  let totalWords = 12;
   const [wordsCollection, setWordsCollection] = useState(
     "hello world two nine go seven you love sum cosmos sun universe can beat you for anything like that put for amazing coding future beat stand under tree god around world phase yes library for building user interfaces based also called a schoolteacher or formally an educator is a person who helps students to acquire knowledge vishesh"
   ); // contains all the words
@@ -47,7 +48,7 @@ function Typing() {
   const loadWords = () => {
     document.body.style.backgroundColor = "white";
     let wordsCollectionArray = [];
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < totalWords; i++) {
       let index = Math.floor(Math.random() * 10);
       wordsCollectionArray.push(fullWordsCollectionArray[index]);
     }
@@ -79,6 +80,7 @@ function Typing() {
         // Last word completed
         clearInterval(timer.current);
         document.body.style.backgroundColor = "yellow";
+        
       }
       if (event.target.value.charAt(event.target.value.length - 1) === " ") {
         // Last word completed
@@ -123,8 +125,40 @@ function Typing() {
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="col py-5 text-center fs-3">
+        <div className="row d-flex justify-content-center">
+          <div className="col-xl-1 col-lg-2 col-md-3 col-3 text-center">
+            <button onClick={
+              ()=>{
+                totalWords = 12
+                loadWords()
+              }
+            } className="btn btn-secondary rounded-pill w-75">12</button>
+          </div>
+          <div className="col-xl-1 col-lg-2 col-md-3 col-3 text-center">
+            <button onClick={()=>{
+              totalWords = 25
+              loadWords()
+            }} className="btn btn-secondary rounded-pill w-75">25</button>
+          </div>
+          <div className="col-xl-1 col-lg-2 col-md-3 col-3 text-center">
+            <button onClick={
+              ()=>{
+                totalWords = 30
+                loadWords()
+              }
+            } className="btn btn-secondary rounded-pill w-75">30</button>
+          </div>
+          <div className="col-xl-1 col-lg-2 col-md-3 col-3 text-center">
+            <button onClick={
+              ()=>{
+                totalWords = 40
+                loadWords()
+              }
+            } className="btn btn-secondary rounded-pill w-75">40</button>
+          </div>
+        </div>
+        <div className="row" style={{minHeight:"200px"}}>
+          <div className="col py-3 text-center fs-3">
             {words.map((word, index) => {
               return <Word key={index} word={word} typedWord={typedWord} />;
             })}
@@ -134,7 +168,7 @@ function Typing() {
           <div className="col text-center">
             <input
               id="userInput"
-              className="border border-5 rounded-pill fs-2 text-center"
+              className="border border-5 rounded-pill fs-4 text-center"
               type="text"
               value={typedWord}
               onChange={handleOnChange}
@@ -142,13 +176,13 @@ function Typing() {
           </div>
         </div>
         <div className="row">
-          <div className="col text-center py-5">
+          <div className="col text-center py-3">
             <button onClick={loadWords} className="btn btn-secondary">
               Load Sentence
             </button>
           </div>
         </div>
-        <div className="row py-5">
+        <div className="row py-2">
           <div className="col-6 m-auto">
             <table className="table text-center fs-1">
               <tbody>
