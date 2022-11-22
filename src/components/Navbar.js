@@ -4,7 +4,7 @@ import logo from "./favicon_ico.png";
 function Navbar() {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-light">
+      <nav className="navbar navbar-expand-lg bg-secondary bg-opacity-25 shadow-sm">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             <img width="40px" src={logo} alt="" />

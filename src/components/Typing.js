@@ -10,13 +10,14 @@ function Typing() {
   const [seconds, setSeconds] = useState(0);
   const [typedWord, setTypedWord] = useState("");
   const [current, setCurrent] = useState(0);
-  let totalWords = 12;
   const [wordsCollection, setWordsCollection] = useState(
     "hello world two nine go seven you love sum cosmos sun universe can beat you for anything like that put for amazing coding future beat stand under tree god around world phase yes library for building user interfaces based also called a schoolteacher or formally an educator is a person who helps students to acquire knowledge vishesh"
   ); // contains all the words
   const [fullWordsCollectionArray, setFullWordsCollectionArray] = useState(
     wordsCollection.split(" ")
   );
+
+  let totalWords = 12;
   const [words, setWords] = useState([
     //sample word object
     {
@@ -49,7 +50,8 @@ function Typing() {
     document.body.style.backgroundColor = "white";
     let wordsCollectionArray = [];
     for (let i = 0; i < totalWords; i++) {
-      let index = Math.floor(Math.random() * 10);
+      let index =
+        Math.floor(Math.random() * 100) % fullWordsCollectionArray.length;
       wordsCollectionArray.push(fullWordsCollectionArray[index]);
     }
     // creating Object for words with details
@@ -80,7 +82,6 @@ function Typing() {
         // Last word completed
         clearInterval(timer.current);
         document.body.style.backgroundColor = "yellow";
-        
       }
       if (event.target.value.charAt(event.target.value.length - 1) === " ") {
         // Last word completed
@@ -124,40 +125,54 @@ function Typing() {
 
   return (
     <>
-      <div className="container">
+      <div className="container pt-4">
         <div className="row d-flex justify-content-center">
           <div className="col-xl-1 col-lg-2 col-md-3 col-3 text-center">
-            <button onClick={
-              ()=>{
-                totalWords = 12
-                loadWords()
-              }
-            } className="btn btn-secondary rounded-pill w-75">12</button>
+            <button
+              onClick={() => {
+                totalWords = 12;
+                loadWords();
+              }}
+              className="btn btn-secondary rounded-pill w-75"
+            >
+              12
+            </button>
           </div>
           <div className="col-xl-1 col-lg-2 col-md-3 col-3 text-center">
-            <button onClick={()=>{
-              totalWords = 25
-              loadWords()
-            }} className="btn btn-secondary rounded-pill w-75">25</button>
+            <button
+              onClick={() => {
+                totalWords = 25;
+                loadWords();
+              }}
+              className="btn btn-secondary rounded-pill w-75"
+            >
+              25
+            </button>
           </div>
           <div className="col-xl-1 col-lg-2 col-md-3 col-3 text-center">
-            <button onClick={
-              ()=>{
-                totalWords = 30
-                loadWords()
-              }
-            } className="btn btn-secondary rounded-pill w-75">30</button>
+            <button
+              onClick={() => {
+                totalWords = 30;
+                loadWords();
+              }}
+              className="btn btn-secondary rounded-pill w-75"
+            >
+              30
+            </button>
           </div>
           <div className="col-xl-1 col-lg-2 col-md-3 col-3 text-center">
-            <button onClick={
-              ()=>{
-                totalWords = 40
-                loadWords()
-              }
-            } className="btn btn-secondary rounded-pill w-75">40</button>
+            <button
+              onClick={() => {
+                totalWords = 40;
+                loadWords();
+              }}
+              className="btn btn-secondary rounded-pill w-75"
+            >
+              40
+            </button>
           </div>
         </div>
-        <div className="row" style={{minHeight:"200px"}}>
+        <div className="row" style={{ minHeight: "200px" }}>
           <div className="col py-3 text-center fs-3">
             {words.map((word, index) => {
               return <Word key={index} word={word} typedWord={typedWord} />;
