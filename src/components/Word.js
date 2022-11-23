@@ -15,10 +15,11 @@ function Word(props) {
           ? "fs-2 text-danger fw-bolder"
           : props.word["status"] === "partially-incorrect"
           ? "fs-2 text-danger fw-bolder opacity-50"
-          : "fs-2 opacity-50"
+          : "fs-2 opacity-50 fw-bolder"
       }`}
     >
-      {props.word["word"] + " "}
+      {props.word["word"]}
+      <span> </span>
     </span>
   ) : (
     <span>
@@ -30,9 +31,9 @@ function Word(props) {
             typedCharacter={props.typedWord[index]}
           />
         );
-      })}{" "}
+      })}
+      <span className="fs-2 fw-bolder"> </span>
     </span>
-    // <span className="bg-info">{props.word["word"] + " "}</span>
   );
 }
 

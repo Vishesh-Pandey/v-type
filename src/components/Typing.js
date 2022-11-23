@@ -15,9 +15,9 @@ function Typing() {
   ); // contains all the words
   const [fullWordsCollectionArray, setFullWordsCollectionArray] = useState(
     wordsCollection.split(" ")
-  );
+  ); // contains all the words in an array
 
-  let totalWords = 12;
+  let totalWords = 12; // default number of words for the test
   const [words, setWords] = useState([
     //sample word object
     {
@@ -32,7 +32,7 @@ function Typing() {
       speed: -1,
       accuracy: 0,
     },
-  ]);
+  ]); // this is the sample text written at the beginning ( Greet )
 
   // function to reset everything when test restarts / new sentence is loaded
   const resetData = () => {
@@ -47,18 +47,20 @@ function Typing() {
 
   // function to load a new sentence
   const loadWords = () => {
-    document.body.style.backgroundColor = "white";
+    document.body.style.backgroundColor = "white"; // as after completing the background becomes yellow
     let wordsCollectionArray = [];
+
+    // This loop will create array of random words
     for (let i = 0; i < totalWords; i++) {
       let index =
         Math.floor(Math.random() * 100) % fullWordsCollectionArray.length;
       wordsCollectionArray.push(fullWordsCollectionArray[index]);
     }
+
     // creating Object for words with details
     clearInterval(timer.current);
     timer.current = null;
     resetData();
-    setCurrent(0);
     let wordsCopy = [];
     for (let i = 0; i < wordsCollectionArray.length; i++) {
       wordsCopy.push({
@@ -89,11 +91,12 @@ function Typing() {
         document.body.style.backgroundColor = "yellow";
       }
     }
+    // condition to check whether user just started the test if yes then it starts the timer
     if (started === false) {
       timer.current = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds + 1);
       }, 1000);
-      setStarted(true);
+      setStarted(true); // setting started as true to prevent the execution of this block during the test
     }
     setTypedWord(event.target.value);
 
@@ -198,8 +201,8 @@ function Typing() {
           </div>
         </div>
         <div className="row py-2">
-          <div className="col-6 m-auto">
-            <table className="table text-center fs-1">
+          <div className="col-sm-6 m-auto bg-secondary bg-opacity-25 rounded-4 py-2">
+            <table className="table text-center fs-1 m-auto">
               <tbody>
                 <tr>
                   <td>WPM</td>
