@@ -6,6 +6,7 @@ function Typing() {
   const [wpm, setwpm] = useState(0);
   const [acc, setacc] = useState(100);
   const [correctCount, setCorrectCount] = useState(0);
+  const [correctCharacters, setCorrectCharacters] = useState(0);
   const [started, setStarted] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [typedWord, setTypedWord] = useState("");
@@ -43,6 +44,7 @@ function Typing() {
     setSeconds(0);
     setTypedWord("");
     setCurrent(0);
+    setCorrectCharacters(0);
   };
 
   // function to load a new sentence
@@ -105,6 +107,7 @@ function Typing() {
       words[current].word.substring(0, event.target.value.length)
     ) {
       words[current].status = "tracking";
+      setCorrectCharacters((correctCharacters) => correctCharacters + 1);
     } else {
       words[current].status = "partially-incorrect";
     }
@@ -204,15 +207,19 @@ function Typing() {
           <div className="col-sm-6 m-auto bg-secondary bg-opacity-25 rounded-4 py-2">
             <table className="table text-center fs-1 m-auto">
               <tbody>
-                <tr>
+                <tr className="fs-1">
                   <td>WPM</td>
                   <td>{wpm}</td>
                 </tr>
-                <tr>
+                <tr className="fs-2">
                   <td>Accuracy</td>
                   <td>{acc}%</td>
                 </tr>
-                <tr className="fs-6">
+                <tr className="fs-3">
+                  <td>CPM</td>
+                  <td>{(correctCharacters / (seconds / 60)).toFixed(2)}</td>
+                </tr>
+                <tr className="fs-4">
                   <td>Time</td>
                   <td>{seconds} seconds</td>
                 </tr>
