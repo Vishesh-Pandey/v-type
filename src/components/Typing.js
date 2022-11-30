@@ -1,3 +1,4 @@
+import "../App.css";
 import React, { useState, useRef } from "react";
 import Word from "./Word";
 
@@ -49,6 +50,9 @@ function Typing() {
 
   // function to load a new sentence
   const loadWords = () => {
+    let element = document.getElementById("sentence");
+    element.classList.toggle("sentence-on-change");
+
     document.body.style.backgroundColor = "white"; // as after completing the background becomes yellow
     let wordsCollectionArray = [];
 
@@ -179,7 +183,7 @@ function Typing() {
           </div>
         </div>
         <div className="row" style={{ minHeight: "200px" }}>
-          <div className="col py-3 text-center fs-3">
+          <div id="sentence" className="col py-3 text-center fs-3 sentence">
             {words.map((word, index) => {
               return <Word key={index} word={word} typedWord={typedWord} />;
             })}
