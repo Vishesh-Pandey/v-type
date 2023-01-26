@@ -1,6 +1,8 @@
 import "../App.css";
 import React, { useState, useRef } from "react";
 import Word from "./Word";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Typing() {
   const [startTime, setStartTime] = useState(0);
@@ -37,6 +39,12 @@ function Typing() {
     },
   ]); // this is the sample text written at the beginning ( Greet )
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.getElementById("userInput").focus();
+  }, []);
+
   // function to reset everything when test restarts / new sentence is loaded
   const resetData = () => {
     setwpm(0);
@@ -54,7 +62,6 @@ function Typing() {
     let element = document.getElementById("sentence");
     element.classList.toggle("sentence-on-change");
 
-    document.body.style.backgroundColor = "white"; // as after completing the background becomes yellow
     let wordsCollectionArray = [];
 
     // This loop will create array of random words
@@ -102,18 +109,39 @@ function Typing() {
       if (event.target.value === words[current]["word"]) {
         console.log("Last word completed and was typed correctly - end test");
         clearInterval(timer.current);
-        document.body.style.backgroundColor = "yellow";
         console.log("Accurate wpm");
         console.log(
           (correctCount + 1) / ((Date.now() - startTime) / (1000 * 60))
         );
+        localStorage.setItem(
+          "wpm",
+          (correctCount + 1) / ((Date.now() - startTime) / (1000 * 60))
+        );
+        localStorage.setItem("acc", acc);
+        localStorage.setItem(
+          "cpm",
+          correctCharacters / ((Date.now() - startTime) / (1000 * 60))
+        );
+        localStorage.setItem("seconds", (Date.now() - startTime) / 1000);
+        navigate("/result");
       }
       if (event.target.value.charAt(event.target.value.length - 1) === " ") {
         console.log("Last word completed and was typed incorrect - end test");
         clearInterval(timer.current);
-        document.body.style.backgroundColor = "yellow";
         console.log("Accurate wpm");
         console.log(correctCount / ((Date.now() - startTime) / (1000 * 60)));
+        localStorage.setItem(
+          "wpm",
+          (correctCount + 1) / ((Date.now() - startTime) / (1000 * 60))
+        );
+        localStorage.setItem("acc", acc);
+        localStorage.setItem(
+          "cpm",
+          correctCharacters / ((Date.now() - startTime) / (1000 * 60))
+        );
+        localStorage.setItem("seconds", (Date.now() - startTime) / 1000);
+        navigate("/result");
+        navigate("/result");
       }
     }
 
@@ -219,30 +247,6 @@ function Typing() {
             <button onClick={loadWords} className="btn btn-secondary">
               Load Sentence
             </button>
-          </div>
-        </div>
-        <div className="row py-2">
-          <div className="col-sm-6 m-auto bg-secondary bg-opacity-25 rounded-4 py-2">
-            <table className="table text-center fs-1 m-auto">
-              <tbody>
-                <tr className="fs-1">
-                  <td>WPM</td>
-                  <td>{wpm}</td>
-                </tr>
-                <tr className="fs-2">
-                  <td>Accuracy</td>
-                  <td>{acc}%</td>
-                </tr>
-                <tr className="fs-3">
-                  <td>CPM</td>
-                  <td>{(correctCharacters / (seconds / 60)).toFixed(2)}</td>
-                </tr>
-                <tr className="fs-4">
-                  <td>Time</td>
-                  <td>{seconds} seconds</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
