@@ -6,7 +6,9 @@ function Char(props) {
   ) : props.typedCharacter === null ? (
     <span className="text-danger fw-bolder fs-2">{props.givenCharacter}</span>
   ) : (
-    <span className="text-info fw-bolder fs-2">{props.givenCharacter}</span>
+    <span className="text-info text-decoration-underline fw-bolder fs-2">
+      {props.givenCharacter}
+    </span>
   );
 }
 
