@@ -202,7 +202,7 @@ function Typing() {
             </button>
           </div>
         </div>
-        <div className="row" style={{ minHeight: "200px" }}>
+        <div className="row" style={{ minHeight: "250px" }}>
           <div id="sentence" className="col py-3 text-center fs-3 sentence">
             {words.map((word, index) => {
               return <Word key={index} word={word} typedWord={typedWord} />;

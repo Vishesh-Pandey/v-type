@@ -6,10 +6,10 @@ function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg bg-secondary bg-opacity-25 shadow-sm">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/v-type">
             <img width="40px" src={logo} alt="" />
           </a>
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/v-type">
             vType
           </a>
           <button

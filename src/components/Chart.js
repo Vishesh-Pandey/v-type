@@ -5,7 +5,7 @@ function Chart() {
   const navigate = useNavigate();
 
   const restartTest = () => {
-    navigate("/");
+    navigate("/v-type");
   };
   return (
     <>
