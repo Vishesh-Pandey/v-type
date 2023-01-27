@@ -6,10 +6,10 @@ function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg bg-secondary bg-opacity-25 shadow-sm">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             <img width="40px" src={logo} alt="" />
           </a>
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             vType
           </a>
           <button
@@ -26,13 +26,14 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <a className="nav-link active" aria-current="page" href="/">
                   Home
                 </a>
               </li>
               <li className="nav-item">
                 <a
                   target="_blank"
+                  rel="noreferrer"
                   className="nav-link active"
                   aria-current="page"
                   href="https://vishesh-pandey.github.io/v-images/"
@@ -43,6 +44,7 @@ function Navbar() {
               <li className="nav-item">
                 <a
                   target="_blank"
+                  rel="noreferrer"
                   className="nav-link active"
                   aria-current="page"
                   href="https://vishesh-pandey.github.io/v-notes/"

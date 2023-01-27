@@ -1,23 +1,19 @@
 import "../App.css";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Word from "./Word";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function Typing() {
   const [startTime, setStartTime] = useState(0);
-  const timer = useRef(null); // timer that increments after every seconds
-  const [wpm, setwpm] = useState(0); // speed in words per minute
   const [acc, setacc] = useState(100); // accuracy
   const [correctCount, setCorrectCount] = useState(0); // correct number of words
   const [correctCharacters, setCorrectCharacters] = useState(0); // correct number of characters
   const [started, setStarted] = useState(false); // checks test on or off
-  const [seconds, setSeconds] = useState(0); // total seconds taken to complete test
   const [typedWord, setTypedWord] = useState(""); // current typed word
   const [current, setCurrent] = useState(0); // current correct word
-  const [wordsCollection, setWordsCollection] = useState(
-    "hello world two nine go seven you love sum cosmos sun universe can beat you for anything like that put for amazing coding future beat stand under tree god around world phase yes library for building user interfaces based also called a schoolteacher or formally an educator is a person who helps students to acquire knowledge vishesh"
-  ); // contains all the words in string format
+  const wordsCollection =
+    "hello world two nine go seven you love sum cosmos sun universe can beat you for anything like that put for amazing coding future beat stand under tree god around world phase yes library for building user interfaces based also called a schoolteacher or formally an educator is a person who helps students to acquire knowledge vishesh"; // contains all the words in string format
   const [fullWordsCollectionArray, setFullWordsCollectionArray] = useState(
     wordsCollection.split(" ")
   ); // contains all the words in an array
@@ -47,11 +43,9 @@ function Typing() {
 
   // function to reset everything when test restarts / new sentence is loaded
   const resetData = () => {
-    setwpm(0);
     setacc(100);
     setCorrectCount(0);
     setStarted(false);
-    setSeconds(0);
     setTypedWord("");
     setCurrent(0);
     setCorrectCharacters(0);
@@ -72,8 +66,6 @@ function Typing() {
     }
 
     // creating Object for words with details
-    clearInterval(timer.current);
-    timer.current = null;
     resetData();
     let wordsCopy = [];
     for (let i = 0; i < wordsCollectionArray.length; i++) {
@@ -88,15 +80,25 @@ function Typing() {
     document.getElementById("userInput").focus();
   };
 
-  // possible conditions for the words - current , correct , incorrect , normal
+  // this saves the data in localStorage and redirects user to /results
+  const saveResults = () => {
+    localStorage.setItem(
+      "wpm",
+      (correctCount + 1) / ((Date.now() - startTime) / (1000 * 60))
+    );
+    localStorage.setItem("acc", acc);
+    localStorage.setItem(
+      "cpm",
+      correctCharacters / ((Date.now() - startTime) / (1000 * 60))
+    );
+    localStorage.setItem("seconds", (Date.now() - startTime) / 1000);
+    navigate("/result");
+  };
 
   // function which is called whenever user types something
   const handleOnChange = (event) => {
     // condition to check whether user just started the test if yes then it starts the timer
     if (started === false) {
-      timer.current = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
-      }, 1000);
       setStartTime(Date.now());
       console.log(startTime);
       setStarted(true); // setting started as true to prevent the execution of this block during the test
@@ -108,40 +110,17 @@ function Typing() {
       // Currently typing last word
       if (event.target.value === words[current]["word"]) {
         console.log("Last word completed and was typed correctly - end test");
-        clearInterval(timer.current);
         console.log("Accurate wpm");
         console.log(
           (correctCount + 1) / ((Date.now() - startTime) / (1000 * 60))
         );
-        localStorage.setItem(
-          "wpm",
-          (correctCount + 1) / ((Date.now() - startTime) / (1000 * 60))
-        );
-        localStorage.setItem("acc", acc);
-        localStorage.setItem(
-          "cpm",
-          correctCharacters / ((Date.now() - startTime) / (1000 * 60))
-        );
-        localStorage.setItem("seconds", (Date.now() - startTime) / 1000);
-        navigate("/result");
+        saveResults();
       }
       if (event.target.value.charAt(event.target.value.length - 1) === " ") {
         console.log("Last word completed and was typed incorrect - end test");
-        clearInterval(timer.current);
         console.log("Accurate wpm");
         console.log(correctCount / ((Date.now() - startTime) / (1000 * 60)));
-        localStorage.setItem(
-          "wpm",
-          (correctCount + 1) / ((Date.now() - startTime) / (1000 * 60))
-        );
-        localStorage.setItem("acc", acc);
-        localStorage.setItem(
-          "cpm",
-          correctCharacters / ((Date.now() - startTime) / (1000 * 60))
-        );
-        localStorage.setItem("seconds", (Date.now() - startTime) / 1000);
-        navigate("/result");
-        navigate("/result");
+        saveResults();
       }
     }
 
@@ -171,7 +150,6 @@ function Typing() {
         return current + 1;
       });
     }
-    setwpm((correctCount / (seconds / 60)).toFixed(2));
     setacc(((correctCount / current) * 100).toFixed(2));
   };
 
