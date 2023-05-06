@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import logo from "./favicon_ico.png";
-import Darkmode from "./dark_mode.svg";
-import Lightmode from "./light_mode.svg";
 
 function Navbar() {
   const [textTheme, setTextTheme] = useState("dark");
   const [theme, setTheme] = useState("light");
 
   const changeTheme = () => {
-    if (theme == "dark") {
+    if (theme === "dark") {
       setTheme("light");
       setTextTheme("dark");
     } else {
@@ -49,40 +47,8 @@ function Navbar() {
                   Home
                 </a>
               </li>
-              <li className="nav-item">
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`nav-link active text-${textTheme}`}
-                  aria-current="page"
-                  href="https://vishesh-pandey.github.io/v-images/"
-                >
-                  vImages
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`nav-link active text-${textTheme}`}
-                  aria-current="page"
-                  href="https://vishesh-pandey.github.io/v-notes/"
-                >
-                  vNotes
-                </a>
-              </li>
             </ul>
-            <a href="#">
-              <img
-                src={theme == "light" ? Darkmode : Lightmode}
-                alt=""
-                onClick={changeTheme}
-                width={30}
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                data-bs-title="Tooltip on bottom"
-              />
-            </a>
+              <i onClick={changeTheme} className={`nav-link h4 ${theme==="dark"?"bi bi-brightness-high-fill text-light":"bi bi-moon-stars-fill"}`}></i>
           </div>
         </div>
       </nav>

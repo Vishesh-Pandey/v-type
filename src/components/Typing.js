@@ -122,6 +122,7 @@ function Typing() {
         console.log(correctCount / ((Date.now() - startTime) / (1000 * 60)));
         saveResults();
       }
+      setFullWordsCollectionArray([])
     }
 
     // tracking

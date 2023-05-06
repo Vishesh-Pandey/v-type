@@ -9,7 +9,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/v-type" element={<Typing />} />
+        <Route path="/" element={<Typing />} />
         <Route path="/result" element={<Chart />} />
       </Routes>
     </>
