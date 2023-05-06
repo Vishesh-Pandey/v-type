@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logo from "./favicon_ico.png";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [textTheme, setTextTheme] = useState("dark");
@@ -39,13 +40,13 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a
+                <Link
                   className={`nav-link active text-${textTheme}`}
                   aria-current="page"
                   href="/"
                 >
                   Home
-                </a>
+                </Link>
               </li>
             </ul>
               <i onClick={changeTheme} className={`nav-link h4 ${theme==="dark"?"bi bi-brightness-high-fill text-light":"bi bi-moon-stars-fill"}`}></i>
