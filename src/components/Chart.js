@@ -1,12 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Chart() {
-  const navigate = useNavigate();
 
-  const restartTest = () => {
-    navigate("/");
-  };
   return (
     <>
       <div className="container">
@@ -41,9 +37,13 @@ function Chart() {
         </div>
         <div className="row">
           <div className="col-12 text-center">
-            <button onClick={restartTest} className="btn btn-secondary">
-              Restart Test
-            </button>
+            <Link
+              className="btn btn-secondary"
+              aria-current="page"
+              to="/v-type"
+            >
+              Restart
+            </Link>
           </div>
         </div>
       </div>

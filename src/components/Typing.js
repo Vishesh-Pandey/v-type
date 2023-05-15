@@ -1,8 +1,10 @@
 import "../App.css";
-import React, { useState } from "react";
-import Word from "./Word";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+
+import Word from "./Word";
+
+import data from '../data.json'
 
 function Typing() {
   const [startTime, setStartTime] = useState(0);
@@ -12,11 +14,7 @@ function Typing() {
   const [started, setStarted] = useState(false); // checks test on or off
   const [typedWord, setTypedWord] = useState(""); // current typed word
   const [current, setCurrent] = useState(0); // current correct word
-  const wordsCollection =
-    "hello world two nine go seven you love sum cosmos sun universe can beat you for anything like that put for amazing coding future beat stand under tree god around world phase yes library for building user interfaces based also called a schoolteacher or formally an educator is a person who helps students to acquire knowledge vishesh"; // contains all the words in string format
-  const [fullWordsCollectionArray, setFullWordsCollectionArray] = useState(
-    wordsCollection.split(" ")
-  ); // contains all the words in an array
+  const [fullWordsCollectionArray, setFullWordsCollectionArray] = useState(data.words);
 
   let totalWords = 12; // default number of words for the test
   const [words, setWords] = useState([

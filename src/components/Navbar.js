@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import logo from "./favicon_ico.png";
 import { Link } from "react-router-dom";
+
+import logo from "./favicon_ico.png";
 
 function Navbar() {
   const [textTheme, setTextTheme] = useState("dark");
@@ -43,13 +44,13 @@ function Navbar() {
                 <Link
                   className={`nav-link active text-${textTheme}`}
                   aria-current="page"
-                  href="/"
+                  href="/v-type"
                 >
                   Home
                 </Link>
               </li>
             </ul>
-              <i onClick={changeTheme} className={`nav-link h4 ${theme==="dark"?"bi bi-brightness-high-fill text-light":"bi bi-moon-stars-fill"}`}></i>
+            <i onClick={changeTheme} className={`nav-link h4 ${theme === "dark" ? "bi bi-brightness-high-fill text-light" : "bi bi-moon-stars-fill"}`}></i>
           </div>
         </div>
       </nav>
