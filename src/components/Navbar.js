@@ -21,12 +21,11 @@ function Navbar() {
     <>
       <nav className={`navbar navbar-expand-lg bg-${theme} shadow-sm`}>
         <div className="container-fluid">
-          <a className="navbar-brand" href="/v-type">
-            <img width="40px" src={logo} alt="" />
-          </a>
           <a className={`navbar-brand text-${textTheme}`} href="/v-type">
+            <img width="30px" className="mx-2" src={logo} alt="" />
             vType
           </a>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -38,6 +37,7 @@ function Navbar() {
           >
             <span className="navbar-toggler-icon" />
           </button>
+
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -50,7 +50,10 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
-            <i onClick={changeTheme} className={`nav-link h4 ${theme === "dark" ? "bi bi-brightness-high-fill text-light" : "bi bi-moon-stars-fill"}`}></i>
+            <a href="https://github.com/Vishesh-Pandey/v-type" target="_blank" rel="noreferrer" className={`btn mx-2 ${theme === "dark" ? "btn-outline-light" : "btn-outline-dark"}`}><i className="bi bi-github"></i></a>
+            <button className="btn btn-outline-dark mx-2">
+              <i onClick={changeTheme} className={`nav-link ${theme === "dark" ? "bi bi-brightness-high-fill text-light" : "bi bi-moon-stars-fill"}`}></i>
+            </button>
           </div>
         </div>
       </nav>

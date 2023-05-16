@@ -216,6 +216,7 @@ function Typing() {
               type="text"
               value={typedWord}
               onChange={handleOnChange}
+              autoComplete="off"
             />
           </div>
         </div>
